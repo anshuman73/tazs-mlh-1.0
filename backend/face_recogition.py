@@ -2,11 +2,13 @@ import requests
 import json
 import os
 
-# set to your own subscription key value
+
 subscription_key = None
 assert subscription_key
 
-# replace <My Endpoint String> with the string from your endpoint URL
+base_url = 'https://<My Endpoint String>.com/face/v1.0/detect'
+
+
 face_api_url = 'https://<My Endpoint String>.com/face/v1.0/detect'
 
 image_url = 'https://upload.wikimedia.org/wikipedia/commons/3/37/Dagestani_man_and_woman.jpg'
