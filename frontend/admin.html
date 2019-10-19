@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Hello User</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/js/plugins/chartist.min.js">
+  <!-- Material Kit CSS -->
+  <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white">
+      <!--
+      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+      Tip 2: you can also add an image using data-image tag
+  -->
+      <div class="logo">
+        <a href="#" class="simple-text logo-mini">
+          P
+        </a>
+        <a href="#" class="simple-text logo-normal">
+          Generic-User
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active  ">
+            <a class="nav-link" href="#0">
+              <i class="material-icons">dashboard</i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <!-- your sidebar here -->
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="#pablo">Dashboard</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#pablo">
+                  <i class="material-icons">notifications</i> Notifications
+                </a>
+              </li>
+              <!-- your navbar here -->
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">money</i>
+                  </div>
+                  <p class="card-category">Balance</p>
+                  <h3 class="card-title">1000</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons text-danger">add</i>
+                    <a href="#">Add Money</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-rose card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">equalizer</i>
+                  </div>
+                  <p class="card-category">Spent Today</p>
+                  <h3 class="card-title">54</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">date_range</i> Last 24 Hours
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">store</i>
+                  </div>
+                  <p class="card-category">Total Spendings</p>
+                  <h3 class="card-title">1000</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">date_range</i> Years
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">explore</i>
+                  </div>
+                  <p class="card-category">Recent Station</p>
+                  <h3 class="card-title">Delhi</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">update</i> 4 hrs ago
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="card">
+              <div class="card-header card-header-icon card-header-rose">
+                <div class="card-icon">
+                  <i class="material-icons">assignment</i>
+                </div>
+                <h4 class="card-title ">Simple Table</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        Amount
+                      </th>
+                      <th>
+                        From
+                      </th>
+                      <th>
+                        To
+                      </th>
+                      <th>
+                        Date
+                      </th>
+                      <th>
+                        Time
+                      </th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          30
+                        </td>
+                        <td>
+                            Adarsh Nagar
+                        </td>
+                        <td>
+                            AIIMS
+                        </td>
+                        <td>
+                            3 August 2019
+                        </td>
+                        <td>
+                          13:00
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          50
+                        </td>
+                        <td>
+                          Dwarka Sector 12
+                        </td>
+                        <td>
+                          Dwarka Mor
+                        </td>
+                        <td>
+                          5 August 2019
+                        </td>
+                        <td>
+                          16:07
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          65
+                        </td>
+                        <td>
+                          Haiderpur
+                        </td>
+                        <td>
+                          Escorts Mujesar
+                        </td>
+                        <td>
+                          5 August 2019
+                        </td>
+                        <td>
+                          18:00
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          40
+                        </td>
+                        <td>
+                          Jawaharlal Nehru Stadium
+                        </td>
+                        <td>
+                          Jama Masjid
+                        </td>
+                        <td>
+                          6 August 2019
+                        </td>
+                        <td>
+                          14:20
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          50
+                        </td>
+                        <td>
+                            Dwarka
+                        </td>
+                        <td>
+                            Dwarka Sector 11
+                        </td>
+                        <td>
+                          5 August 2019
+                        </td>
+                        <td>
+                          16:10
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          62
+                        </td>
+                        <td>
+                            Green Park
+                        </td>
+                        <td>
+                            Haiderpur
+                        </td>
+                        <td>
+                           3 August 2019
+                        </td>
+                        <td>
+                          11:17
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+  </div>
+  <footer class="footer">
+    <div class="container-fluid">
+      <nav class="float-left">
+        <ul>
+          <li>
+            <a href="#">
+              TAZS
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="copyright float-right">
+        &copy;
+        <script>
+          document.write(new Date().getFullYear())
+        </script>, made with <i class="material-icons">favorite</i> by
+        <a href="#" target="_blank">TAZS</a> for a better web.
+      </div>
+      <!-- your footer here -->
+    </div>
+  </footer>
+  </div>
+  </div>
+
+  <script src="assets/js/plugins/chartist.min.js"></script>
+  <script>
+    new Chartist.Bar('#pieChart', {
+  labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+  series: [
+    [5, 4, 3, 7],
+    [3, 2, 9, 5]
+  ]
+}, {
+  seriesBarDistance: 10,
+  reverseData: true,
+  horizontalBars: true,
+  axisY: {
+    offset: 70
+  }
+});
+  </script>
+
+<script>
+  new Chartist.Line('#colorRoundedChart', {
+  series: [[
+    {x: 1, y: 100},
+    {x: 2, y: 200},
+    {x: 3, y: 500},
+    {x: 5, y: 300},
+    {x: 8, y: 1000},
+    {x: 9, y: 800},
+    {x: 11, y: 100},
+    {x: 13, y: 200},
+    {x: 15, y: 500},
+    {x: 18, y: 300}
+  ]]
+}, {
+  axisX: {
+    type: Chartist.AutoScaleAxis,
+    onlyInteger: true
+  }
+});
+  </script>
+    
+</body>
+
+</html>
