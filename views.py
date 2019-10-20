@@ -50,6 +50,7 @@ def signup_id(user_id):
     if request.method == 'POST':
         print(request.data)
         return 'ok'
+        #return redirect(url_for('dashboard'))
     else:
         return render_template('signup.html')
 
