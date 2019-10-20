@@ -1,11 +1,11 @@
 import os
 from app import app, db
-from models import Face, User, Check
+from models import Face, User
 from forms import LoginForm
 from flask import session, redirect, url_for, render_template, abort, request, flash, Response, send_from_directory
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
-
+from base64 import decode
 
 
 @app.route('/')
@@ -18,8 +18,8 @@ def index():
 
 @app.route('/dashboard')
 def dashboard():
-    balance  = subprocess.check_output(["node", "../matic/balance.js"]).decode('utf8')
-    return render_template("admin.html", balance=balance)
+    user = User.get_by_username(session.get('username', None))
+    return render_template("admin.html", balance=user.balance)
 
 
 @app.route('/camera-in')
@@ -109,3 +109,12 @@ def signup():
     return render_template('login.html', form=form)
 
 
+@app.route('/register', methods=['POST'])
+def register_by_ui_path():
+    data = request.get_json()
+    if data:
+        image = decode(data['photo'])
+        name = decode(data['name'])
+        print(name)
+    else:
+        print('blah')

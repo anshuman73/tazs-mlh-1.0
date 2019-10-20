@@ -43,7 +43,7 @@ def register_face(images, person_name):
     for image in images:
         image_file = open(image, "rb").read()
         image = io.BytesIO(image_file)
-        face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, person.person_id, w)
+        face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, person.person_id, image)
     face_client.person_group.train(PERSON_GROUP_ID)
 
 
@@ -55,7 +55,6 @@ def find_person(image):
     if not results:
         return None
     for person in results:
-        return person.face_id, person.candidates[0].confidence # Get topmost confidence score
+        return person.name, person.candidates[0].confidence # Get topmost confidence score
 
 #face_client.person_group.create(person_group_id=PERSON_GROUP_ID, name=PERSON_GROUP_ID)
-print('done')
