@@ -6,6 +6,7 @@ from flask import session, redirect, url_for, render_template, abort, request, f
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import base64
+from face_recogition import register_face
 
 
 @app.route('/')
@@ -41,27 +42,37 @@ def signup():
             new_user = User(username, password)
             db.session.add(new_user)
             db.session.commit()
+            session['username'] = new_user.username
             return redirect(url_for('signup_id', user_id=new_user.id))
     return render_template('login.html', form=form)
 
 
-@app.route('/signup/<user_id>', methods=['GET', 'POST'])
+@app.route('/signup/<user_id>', methods=['GET'])
 def signup_id(user_id):
-    if request.method == 'POST':
-        print(request.data)
-        return 'ok'
-        #return redirect(url_for('dashboard'))
-    else:
-        return render_template('signup.html')
+    return render_template('signup.html', user_id=user_id)
 
+
+@app.route('/signup-complete/<user_id>', methods=['POST'])
+def signup_complete(user_id):
+    if request.method == 'POST':
+        file = request.files['webcam']
+        print(file)
+        if file:
+            user = User.get_by_user_id(user_id)
+            register_face([file.read()], user.username)
+            return 'OK', 200
+        else:
+            return 'NOT OK', 500
 
 @app.route('/register', methods=['POST'])
 def register_by_ui_path():
-    data = request.get_json()
-    print(request.data)
+    data = request.form
+    print(data)
+    print(data['photo'])
+    print(data['name'])
     if data:
-        image = base64.b64decode(data['photo'])
-        name = base64.b64decode(data['name'])
+        image = data['photo']
+        name = data['name']
         print(name)
         return 'OK', 200
 

@@ -17,6 +17,10 @@ class User(db.Model):
     @staticmethod
     def get_by_username(username):
         return User.query.filter_by(username=username).first()
+    
+    @staticmethod
+    def get_by_user_id(id):
+        return User.query.filter_by(id=id).first()
 
 
 class Face(db.Model):

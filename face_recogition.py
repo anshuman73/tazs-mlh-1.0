@@ -10,7 +10,7 @@ import sys
 
 
 def set_environ_variables():
-    env_file = os.path.join(os.path.dirname(os.getcwd()), '.env')
+    env_file = '.env'
     with open(env_file) as envfile:
         for line in envfile:
             data = line.split('=')
@@ -44,8 +44,7 @@ def get_training_status():
 def register_face(images, person_name):
     person = face_client.person_group_person.create(PERSON_GROUP_ID, person_name)
     for image in images:
-        image_file = open(image, "rb").read()
-        image = io.BytesIO(image_file)
+        image = io.BytesIO(image)
         face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, person.person_id, image)
     face_client.person_group.train(PERSON_GROUP_ID)
     get_training_status()
