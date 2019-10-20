@@ -11,9 +11,9 @@
   <link rel="stylesheet" type="text/css"
     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-  <link rel="stylesheet" href="assets/js/plugins/chartist.min.js">
+  <link rel="stylesheet" href="{{ url_for('static', filename='js/plugins/chartist.min.js') }}">
   <!-- Material Kit CSS -->
-  <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='css/material-dashboard.css') }}" rel="stylesheet" />
 </head>
 
 <body>
@@ -304,7 +304,7 @@
   </div>
   </div>
 
-  <script src="assets/js/plugins/chartist.min.js"></script>
+  <script src="{{ url_for('static', filename='js/plugins/chartist.min.js') }}"></script>
   <script>
     new Chartist.Bar('#pieChart', {
   labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
