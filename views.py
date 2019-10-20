@@ -17,7 +17,7 @@ def index():
 @app.route('/dashboard')
 def dashboard():
     user = User.get_by_username(session.get('username', None))
-    return render_template("admin.html", balance=user.balance)
+    return render_template("admin.html", balance=user.balance, username=user.username)
 
 @app.route('/camera-in')
 def camera_in():
@@ -85,7 +85,33 @@ def inputstream():
     if request.method == 'POST':
         file = request.files['webcam']
         if file:
-            print('Found', find_person(file.read()))
+            try:
+                person_found = find_person(file.read())
+                print(f'{person_found} checked in!')
+
+            except:
+                pass
+            return 'OK', 200
+        else:
+            return 'NOT OK', 500
+
+
+@app.route('/out', methods=['POST'])
+def outputstream():
+    if request.method == 'POST':
+        file = request.files['webcam']
+        if file:
+            try:
+                person_found = find_person(file.read())
+                print(f'{person_found} checked out!')
+                print('Total cost = Rs. 37')
+                user = User.get_by_username(person_found)
+                user.balance = user.balance - 37
+                db.session.add(user)
+                db.session.commit()
+                print(f'New Balance: {user.balance}')
+            except:
+                pass
             return 'OK', 200
         else:
             return 'NOT OK', 500
