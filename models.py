@@ -3,20 +3,20 @@ from app import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.Text, nullable=False)
+    username = db.Column(db.Text, nullable=False)
     balance = db.Column(db.Integer)
     password = db.Column(db.Text)
     faces = db.relationship('Face', backref='user', lazy=True)
     checks = db.relationship('Check', backref='user', lazy=True)
 
-    def __init__(self, user_name, password='password'):
-        self.user_name = user_name
+    def __init__(self, username, password='password'):
+        self.username = username
         self.password = password
         self.balance = 100
     
     @staticmethod
     def get_by_username(username):
-        return User.query.filter_by(username=username)
+        return User.query.filter_by(username=username).first()
 
 
 class Face(db.Model):

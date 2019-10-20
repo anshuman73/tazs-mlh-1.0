@@ -16,7 +16,7 @@
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href=" {{ url_for('static', filename='/css/material-dashboard.css?v=2.1.0') }}" rel="stylesheet" />
+    <link href=" {{ url_for('static', filename='css/material-dashboard.css') }}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ url_for('static', filename='demo/demo.css') }}" rel="stylesheet" />
     <script type="text/javascript" src=" "></script>
@@ -65,7 +65,7 @@
     <!-- End Navbar -->
     <div class="wrapper wrapper-full-page">
         <div class="page-header login-page header-filter" filter-color="black"
-            style="background-image: url('../../assets/img/login.jpg'); background-size: cover; background-position: top center;">
+            style="background-image: url("{{ url_for('static', filename='img/login.jpg') }}"); background-size: cover; background-position: top center;">
             <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
             <div class="container">
                 <div class="row">
@@ -161,9 +161,10 @@
     <!--  Notifications Plugin    -->
     <script src="{{ url_for('static', filename='js/plugins/bootstrap-notify.js') }}"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{{ url_for('static', filename='js/material-dashboard.js?v=2.1.0') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/material-dashboard.js') }}" type="text/javascript"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="{{ url_for('static', filename='demo/demo.js') }}"></script>
+    <script>
           $(document).ready(function () {
             $().ready(function () {
                 $sidebar = $('.sidebar');

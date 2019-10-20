@@ -18,7 +18,6 @@ def dashboard():
     user = User.get_by_username(session.get('username', None))
     return render_template("admin.html", balance=user.balance)
 
-
 @app.route('/camera-in')
 def camera_in():
     return render_template('camera_in.html')
@@ -36,6 +35,7 @@ def signup():
         username, password = form.username.data, form.password.data
         user = User.get_by_username(username)
         if user and user.password == password:
+            session['username'] = user.username
             return redirect(url_for('dashboard'))
         else:
             new_user = User(username, password)
@@ -49,19 +49,24 @@ def signup():
 def signup_id(user_id):
     if request.method == 'POST':
         print(request.data)
+        return 'ok'
     else:
-        render_template('signup.html')
+        return render_template('signup.html')
 
 
 @app.route('/register', methods=['POST'])
 def register_by_ui_path():
     data = request.get_json()
+    print(request.data)
     if data:
         image = base64.b64decode(data['photo'])
         name = base64.b64decode(data['name'])
         print(name)
+        return 'OK', 200
+
     else:
         print('blah')
+        return 'FAIL', 500
 
 
 @app.route('/static/<path:path>')
