@@ -1,9 +1,12 @@
 from azure.cognitiveservices.vision.face import FaceClient
+from azure.cognitiveservices.vision.face.models import TrainingStatusType
 from msrest.authentication import CognitiveServicesCredentials
 import io
 import uuid
 import os
 from datetime import datetime
+import time
+import sys
 
 
 def set_environ_variables():
@@ -45,6 +48,7 @@ def register_face(images, person_name):
         image = io.BytesIO(image_file)
         face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, person.person_id, image)
     face_client.person_group.train(PERSON_GROUP_ID)
+    get_training_status()
 
 
 def find_person(image):
