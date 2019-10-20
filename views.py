@@ -10,7 +10,7 @@ import base64
 
 @app.route('/')
 def index():
-    return 'okay'
+    return redirect(url_for('signup'))
 
 
 @app.route('/dashboard')
@@ -41,8 +41,16 @@ def signup():
             new_user = User(username, password)
             db.session.add(new_user)
             db.session.commit()
-            return render_template('signup.html', user_id=new_user.id)
+            return redirect(url_for('signup_id', user_id=new_user.id))
     return render_template('login.html', form=form)
+
+
+@app.route('/signup/<user_id>', methods=['GET', 'POST'])
+def signup_id(user_id):
+    if request.method == 'POST':
+        print(request.data)
+    else:
+        render_template('signup.html')
 
 
 @app.route('/register', methods=['POST'])
@@ -54,3 +62,8 @@ def register_by_ui_path():
         print(name)
     else:
         print('blah')
+
+
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
