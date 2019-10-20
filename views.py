@@ -6,7 +6,7 @@ from flask import session, redirect, url_for, render_template, abort, request, f
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import base64
-from face_recogition import register_face
+from face_recogition import register_face, find_person
 
 
 @app.route('/')
@@ -56,7 +56,6 @@ def signup_id(user_id):
 def signup_complete(user_id):
     if request.method == 'POST':
         file = request.files['webcam']
-        print(file)
         if file:
             user = User.get_by_user_id(user_id)
             register_face([file.read()], user.username)
@@ -66,21 +65,27 @@ def signup_complete(user_id):
 
 @app.route('/register', methods=['POST'])
 def register_by_ui_path():
-    data = request.form
-    print(data)
-    print(data['photo'])
-    print(data['name'])
-    if data:
-        image = data['photo']
-        name = data['name']
-        print(name)
-        return 'OK', 200
+    name = request.form['name']
+    image = request.files['photo']
+    new_user = User(name)
+    db.session.add(new_user)
+    db.session.commit()
+    register_face([image.read()], new_user.username)
 
-    else:
-        print('blah')
-        return 'FAIL', 500
+    return 'OK', 200
 
 
 @app.route('/static/<path:path>')
 def send_static(path):
     return send_from_directory('static', path)
+
+
+@app.route('/in', methods=['POST'])
+def inputstream():
+    if request.method == 'POST':
+        file = request.files['webcam']
+        if file:
+            print('Found', find_person(file.read()))
+            return 'OK', 200
+        else:
+            return 'NOT OK', 500

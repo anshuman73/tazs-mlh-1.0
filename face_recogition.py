@@ -7,6 +7,8 @@ import os
 from datetime import datetime
 import time
 import sys
+from models import User
+from app import db
 
 
 def set_environ_variables():
@@ -18,7 +20,7 @@ def set_environ_variables():
 
 set_environ_variables()
 
-PERSON_GROUP_ID = 'registered-people'
+PERSON_GROUP_ID = 'all-people'
 
 face_api_key = os.environ.get('FACE_SUBSCRIPTION_KEY', None)
 assert face_api_key
@@ -43,21 +45,37 @@ def get_training_status():
 
 def register_face(images, person_name):
     person = face_client.person_group_person.create(PERSON_GROUP_ID, person_name)
+    user = User.get_by_username(person_name)
+    user.person_id = person.person_id
+    db.session.add(user)
+    db.session.commit()
     for image in images:
         image = io.BytesIO(image)
         face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, person.person_id, image)
+    print('New person added: ', person_name)
+    print('Starting Training.')
     face_client.person_group.train(PERSON_GROUP_ID)
     get_training_status()
 
 
 def find_person(image):
-    image = io.BytesIO(open(image, 'rb').read())
+    image = io.BytesIO(image)
     faces = face_client.face.detect_with_stream(image)
     face_ids = [face.face_id for face in faces]
     results = face_client.face.identify(face_ids, PERSON_GROUP_ID)
     if not results:
         return None
-    for person in results:
-        return person.name, person.candidates[0].confidence # Get topmost confidence score
+    else:
+        for result in results:
+            # Find the top candidate for each face
+            candidates = sorted(result.candidates, key=lambda c: c.confidence, reverse=True)
+            # Was anyone recognized?
+            if len(candidates) > 0:
+                # Get just the top candidate
+                top_candidate = candidates[0]
+                # See who the person is
+                person = face_client.person_group_person.get(PERSON_GROUP_ID, top_candidate.person_id)
+                return str(person.name)
+            return None
 
 #face_client.person_group.create(person_group_id=PERSON_GROUP_ID, name=PERSON_GROUP_ID)

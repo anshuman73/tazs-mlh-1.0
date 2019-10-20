@@ -8,6 +8,7 @@ class User(db.Model):
     password = db.Column(db.Text)
     faces = db.relationship('Face', backref='user', lazy=True)
     checks = db.relationship('Check', backref='user', lazy=True)
+    person_id = db.Column(db.Text)
 
     def __init__(self, username, password='password'):
         self.username = username
@@ -21,7 +22,10 @@ class User(db.Model):
     @staticmethod
     def get_by_user_id(id):
         return User.query.filter_by(id=id).first()
-
+    
+    @staticmethod
+    def get_by_person_id(person_id):
+        return User.query.filter_by(person_id=person_id).first()
 
 class Face(db.Model):
     id = db.Column(db.Integer, primary_key=True)
